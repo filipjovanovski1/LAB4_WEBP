@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Song</title>
+</head>
+<body>
+<h1 th:text="${'Editing song ' + song.getTitle()}"></h1>
+<h2 th:text="${song.getGenre()}"></h2>
+<h2 th:text="${song.getReleaseYear()}"></h2>
+<form action="/songs" method="get">
+    New title: <input type="text" name="title" th:placeholder="${song.getTitle()}"> <br>
+    New genre: <input type="text" name="genre" th:placeholder="${song.getGenre()}"> <br>
+    New Release Year: <input type="text" name="year" th:placeholder="${song.getReleaseYear()}"> <br>
+    New Album:
+    <select name="album" th:each="album : ${albums}">
+        <option th:value="${album.getId()}" th:text="${album.getName()}"></option>
+    </select> <br>
+    <input type="submit" name="Save song">
+</form>
+</body>
+</html>

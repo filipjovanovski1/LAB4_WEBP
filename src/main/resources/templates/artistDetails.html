@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artist Details</title>
+</head>
+<body>
+<h1 th:text="${artist.getFullName()}"></h1>
+<h2 th:text="${artist.getBio()}"></h2>
+<h2>Songs:</h2>
+<ul th:each="song: ${artist.getSongs()}">
+    <li>
+        <span th:text="${song.getTitle()}"></span>
+    </li>
+</ul>
+<a href="/listSongs">Back to Songs</a>
+</body>
+</html>
