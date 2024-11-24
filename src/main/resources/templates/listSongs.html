@@ -11,21 +11,32 @@
 <ul th:each="song : ${songs}">
     <li>
         <form action="/artists" method="get">
+            <input type="hidden" name="songId" th:value="${song.getId()}">
             Title: <span th:text="${song.getTitle()}"></span>
             Genre: <span th:text="${song.getGenre()}"></span>
             Release Year: <span th:text="${song.getReleaseYear()}"></span>
             Album: <span th:text="${song.getAlbum().getName()}"></span>
-            <input type="submit" name="songId" th:value="${song.getId()}">
+            <input type="submit" value="Add Artists">
         </form>
         <form th:action="@{/songs/edit/{songId}(songId=${song.getId()})}" method="get">
-            <input type="submit" name="Edit Song">
+            <input type="submit" value="Edit Song">
         </form>
         <form th:action="@{/songs/delete/{songId}(songId=${song.getId()})}" method="get">
-            <input type="submit" name="Delete Song">
+            <input type="submit" value="Delete Song">
         </form>
     </li>
 </ul>
 
-<input type="submit" value="Submit">
+<h2>Add new song</h2>
+<form th:action="@{/songs/add}" method="post">
+    Title: <input type="text" name="title" th:placeholder="${song.getTitle()}" required> <br>
+    Genre: <input type="text" name="genre" th:placeholder="${song.getGenre()}" required> <br>
+    Release Year: <input type="text" name="year" th:placeholder="${song.getReleaseYear()}" required> <br>
+    Album:
+    <select name="album" th:each="album : ${albums}" required>
+        <option th:value="${album.getId()}" th:text="${album.getName()}"></option>
+    </select> <br>
+    <input type="submit" value="Save song">
+</form>
 </body>
 </html>

@@ -1,19 +1,16 @@
 package mk.finki.ukim.mk.lab.bootstrap;
 
 import jakarta.annotation.PostConstruct;
-import mk.finki.ukim.mk.lab.model.Album;
-import mk.finki.ukim.mk.lab.model.Artist;
-import mk.finki.ukim.mk.lab.model.Song;
+import mk.finki.ukim.mk.lab.model.*;
 import mk.finki.ukim.mk.lab.repository.jpa.AlbumRepository;
 import mk.finki.ukim.mk.lab.repository.jpa.ArtistRepository;
 import mk.finki.ukim.mk.lab.repository.jpa.SongRepository;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@DependsOn({"albumRepository", "artistRepository", "songRepository"})
 public class DataHolder {
     public static List<Artist> artists;
     public static List<Song> songs;
@@ -38,18 +35,18 @@ public class DataHolder {
         artists.add(new Artist("Ozzy", "Ozbourne", "Heavy Metal"));
         artists.add(new Artist("Einar", "Solberg", "Prog Metal"));
 
-        if(this.artistRepository.count()==0){
+        if (this.artistRepository.count() == 0) {
             this.artistRepository.saveAll(artists);
         }
 
         songs = new ArrayList<>();
-        songs.add(new Song("Living on a prayer", "Rock", 1978));
-        songs.add(new Song("Enter Sandman", "Heavy Metal", 1991));
-        songs.add(new Song("Crazy Train", "Heavy Metal", 1990));
-        songs.add(new Song("Adventure of a lifetime", "Pop rock", 2015));
-        songs.add(new Song("The sky is red", "Prog Metal", 2019));
+        songs.add(new Song("t1","Living on a prayer", "Rock", 1978));
+        songs.add(new Song("t2","Enter Sandman", "Heavy Metal", 1991));
+        songs.add(new Song("t3","Crazy Train", "Heavy Metal", 1990));
+        songs.add(new Song("t4","Adventure of a lifetime", "Pop rock", 2015));
+        songs.add(new Song("t5","The sky is red", "Prog Metal", 2019));
 
-        if(this.songRepository.count()==0){
+        if (this.songRepository.count() == 0) {
             this.songRepository.saveAll(songs);
         }
 
@@ -60,7 +57,8 @@ public class DataHolder {
         albums.add(new Album("A Head Full Of Dreams", "Pop Rock", 2015));
         albums.add(new Album("Pitfalls", "Prog Metal", 2019));
 
-        if(this.albumRepository.count()==0){
+        System.out.println(albumRepository);
+        if (this.albumRepository.count() == 0) {
             this.albumRepository.saveAll(albums);
         }
     }

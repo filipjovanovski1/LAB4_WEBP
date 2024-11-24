@@ -1,4 +1,4 @@
-package mk.finki.ukim.mk.lab.web;
+package mk.finki.ukim.mk.lab.web.servlet;
 
 import mk.finki.ukim.mk.lab.service.ArtistService;
 import org.thymeleaf.context.WebContext;

@@ -14,9 +14,11 @@ public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String firstName;
     private String lastName;
     private String bio;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Song> songs;
 
@@ -27,7 +29,7 @@ public class Artist {
         this.songs = new ArrayList<>();
     }
 
-    public String getFullName(){
-        return STR."\{firstName} \{lastName}";
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 }

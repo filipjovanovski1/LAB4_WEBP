@@ -8,14 +8,17 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "Album")
 @NoArgsConstructor
 public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String genre;
     private int year;
+
     @OneToMany
     List<Song> songs;
 

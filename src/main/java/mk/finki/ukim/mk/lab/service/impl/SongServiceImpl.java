@@ -39,4 +39,24 @@ public class SongServiceImpl implements SongService {
         artistRepository.save(artist);
         return artist;
     }
+
+    @Override
+    public void save(Song song) {
+        songRepository.save(song);
+    }
+
+    @Override
+    public void delete(Long id) {
+        songRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(Long id, String trackId, String title, String genre, int year) {
+        Song song = songRepository.findById(id).get();
+        song.setTrackId(trackId);
+        song.setTitle(title);
+        song.setGenre(genre);
+        song.setReleaseYear(year);
+        this.songRepository.save(song);
+    }
 }
