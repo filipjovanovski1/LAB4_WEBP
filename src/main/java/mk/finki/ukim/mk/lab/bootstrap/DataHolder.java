@@ -39,17 +39,6 @@ public class DataHolder {
             this.artistRepository.saveAll(artists);
         }
 
-        songs = new ArrayList<>();
-        songs.add(new Song("t1","Living on a prayer", "Rock", 1978));
-        songs.add(new Song("t2","Enter Sandman", "Heavy Metal", 1991));
-        songs.add(new Song("t3","Crazy Train", "Heavy Metal", 1990));
-        songs.add(new Song("t4","Adventure of a lifetime", "Pop rock", 2015));
-        songs.add(new Song("t5","The sky is red", "Prog Metal", 2019));
-
-        if (this.songRepository.count() == 0) {
-            this.songRepository.saveAll(songs);
-        }
-
         albums = new ArrayList<>();
         albums.add(new Album("Slippery When Wet", "Rock", 1978));
         albums.add(new Album("Metallica", "Heavy Metal", 1991));
@@ -57,9 +46,23 @@ public class DataHolder {
         albums.add(new Album("A Head Full Of Dreams", "Pop Rock", 2015));
         albums.add(new Album("Pitfalls", "Prog Metal", 2019));
 
-        System.out.println(albumRepository);
         if (this.albumRepository.count() == 0) {
             this.albumRepository.saveAll(albums);
         }
+
+        songs = new ArrayList<>();
+        songs.add(new Song("t1","Living on a prayer", "Rock", 1978));
+        songs.add(new Song("t2","Enter Sandman", "Heavy Metal", 1991));
+        songs.add(new Song("t3","Crazy Train", "Heavy Metal", 1990));
+        songs.add(new Song("t4","Adventure of a lifetime", "Pop rock", 2015));
+        songs.add(new Song("t5","The sky is red", "Prog Metal", 2019));
+        for(int i =0;i<songs.size();i++){
+            songs.get(i).setAlbum(albums.get(i));
+        }
+        if (this.songRepository.count() == 0) {
+            this.songRepository.saveAll(songs);
+        }
+
+
     }
 }

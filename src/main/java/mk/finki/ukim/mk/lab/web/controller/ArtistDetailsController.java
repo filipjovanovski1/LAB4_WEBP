@@ -16,8 +16,8 @@ public class ArtistDetailsController {
         this.artistService = artistService;
     }
 
-    @GetMapping("{artistId}")
-    public String getArtistDetail(@PathVariable Long artistId, Model model){
+    @GetMapping
+    public String getArtistDetail(@RequestParam Long artistId, Model model){
         Artist artist = artistService.findById(artistId);
         model.addAttribute("artist", artist);
         return "artistDetails";

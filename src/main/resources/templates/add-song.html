@@ -12,8 +12,8 @@
     New genre: <input type="text" name="genre" th:value="(${song} != null ? ${song.getGenre()} : '')" required> <br>
     New Release Year: <input type="text" name="year" th:value="(${song} != null ? ${song.getReleaseYear()} : '')" required> <br>
     New Album:
-    <select name="album" th:each="album : ${albums}" required>
-        <option th:value="${album.getId()}" th:text="${album.getName()}"></option>
+    <select name="albumId" required>
+        <option th:each="album : ${albums}"  th:value="${album.getId()}" th:text="${album.getName()}"></option>
     </select> <br>
     <input type="submit" name="Save song">
 </form>

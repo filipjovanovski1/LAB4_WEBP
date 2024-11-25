@@ -17,7 +17,7 @@ public class Album {
 
     private String name;
     private String genre;
-    private int year;
+    private int releaseYear;
 
     @OneToMany
     List<Song> songs;
@@ -25,6 +25,6 @@ public class Album {
     public Album(String name, String genre, int year) {
         this.name = name;
         this.genre = genre;
-        this.year = year;
+        this.releaseYear = year;
     }
 }

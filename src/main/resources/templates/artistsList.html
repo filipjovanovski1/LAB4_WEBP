@@ -40,10 +40,10 @@
     <h2>Select artist:</h2>
 
     <form action="/songDetails" method="post">
-        <input type="hidden" name="trackID" th:value="${trackID}" />
+        <input type="hidden" name="songId" th:value="${songId}" />
         <ul th:each="artist : ${artists}">
             <li>
-                <input type="radio" name="artistID" th:value="${artist.getId()}" th:text="${artist.getFirstName()}">
+                <input type="radio" name="artistId" th:value="${artist.getId()}" th:text="${artist.getFirstName()}">
                 <span th:text="${artist.getLastName()}"></span>
             </li>
         </ul>
@@ -54,7 +54,7 @@
     <table>
         <tr>
             <td><b>Track Id</b></td>
-            <td th:text="${trackID}"></td>
+            <td th:text="${songId}"></td>
         </tr>
     </table>
 </aside>

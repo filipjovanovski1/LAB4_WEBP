@@ -42,9 +42,7 @@ public class SongController {
 
     @GetMapping("/edit/{songId}")
     public String editSong(@PathVariable Long songId, Model model) {
-        Song song = songService.findById(songId);
-        model.addAttribute("song", song);
-        return "redirect:/artists?trackId=" + songId;
+        return "redirect:/artists?songId=" + songId;
     }
 
     @GetMapping("/edit-form/{id}")
