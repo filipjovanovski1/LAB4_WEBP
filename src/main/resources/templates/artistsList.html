@@ -49,6 +49,11 @@
         </ul>
         <input type='submit' value='Add artist'>
     </form>
+    <form action="/artists/search" method="get">
+        <input type="hidden" name="songId" th:value="${songId}">
+        <input type="text" name="query" placeholder="Search for artists" required>
+        <input type="submit" value="Search for artist">
+    </form>
 </section>
 <aside>
     <table>

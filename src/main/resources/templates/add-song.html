@@ -9,13 +9,14 @@
 <form action="/songs/add" method="post">
     Track Id: <input type="text" name="trackId" th:value="(${song} != null ? ${song.getTrackId()} : '')" required> <br>
     Title: <input type="text" name="title" th:value="(${song} != null ? ${song.getTitle()} : '')" required> <br>
-    New genre: <input type="text" name="genre" th:value="(${song} != null ? ${song.getGenre()} : '')" required> <br>
-    New Release Year: <input type="text" name="year" th:value="(${song} != null ? ${song.getReleaseYear()} : '')" required> <br>
-    New Album:
+    Genre: <input type="text" name="genre" th:value="(${song} != null ? ${song.getGenre()} : '')" required> <br>
+    Release Year: <input type="text" name="year" th:value="(${song} != null ? ${song.getReleaseYear()} : '')" required> <br>
+    Album:
     <select name="albumId" required>
         <option th:each="album : ${albums}"  th:value="${album.getId()}" th:text="${album.getName()}"></option>
     </select> <br>
-    <input type="submit" name="Save song">
+    <input type="hidden" name="id" th:value="(${song} != null ? ${song.getId()} : '')">
+    <input type="submit" value="Save song">
 </form>
 
 </body>

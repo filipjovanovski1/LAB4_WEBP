@@ -6,7 +6,6 @@ import mk.finki.ukim.mk.lab.service.SongService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,11 +21,18 @@ public class ArtistController {
     }
 
     @GetMapping
-    public String getArtistsPage(@RequestParam Long songId, Model model){
+    public String getArtistsPage(@RequestParam Long songId, Model model) {
         Song song = songService.findById(songId);
         model.addAttribute("songId", songId);
         model.addAttribute("song", song);
         model.addAttribute("artists", artistService.listArtists());
         return "artistsList";
+    }
+
+    @GetMapping("/search")
+    public String getSearchArtist(@RequestParam Long songId, @RequestParam String query, Model model) {
+        model.addAttribute("artists", artistService.searchArtists(query));
+        model.addAttribute("songId", songId);
+        return "search-artist";
     }
 }

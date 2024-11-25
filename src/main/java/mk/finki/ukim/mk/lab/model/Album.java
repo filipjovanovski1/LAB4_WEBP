@@ -8,7 +8,6 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Album")
 @NoArgsConstructor
 public class Album {
     @Id

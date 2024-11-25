@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <form action="/songDetails" method="post">
+        <input type="hidden" name="songId" th:value="${songId}" />
+        <ul>
+            <li th:each="artist : ${artists}">
+                <input type="radio" name="artistId" th:value="${artist.getId()}" th:text="${artist.getFullName()}">
+            </li>
+        </ul>
+        <input type='submit' value='Add artist'>
+    </form>
+</body>
+</html>
