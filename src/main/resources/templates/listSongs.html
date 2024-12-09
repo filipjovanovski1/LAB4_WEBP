@@ -27,6 +27,18 @@
     </li>
 </ul>
 
+<h2>By Albums</h2>
+<ul>
+    <li th:each="album : ${albums}">
+        <span th:text="${album.getName()}"></span>
+        <ul>
+            <li th:each="song : ${album.getSongs()}">
+                <span th:text="${song.getTitle()}"></span>
+            </li>
+        </ul>
+    </li>
+</ul>
+
 <h2>Add new song</h2>
 <form th:action="@{/songs/add-form}" method="get">
     <input type="submit" value="Add new Song">

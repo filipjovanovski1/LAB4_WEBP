@@ -30,11 +30,12 @@ public class SongController {
     @PostMapping("/add")
     public String saveSong(@RequestParam(required = false) Long id, @RequestParam String trackId, @RequestParam String title, @RequestParam String genre, @RequestParam String year, @RequestParam Long albumId) {
         if(id != null){
-            this.songService.update(id, trackId, title, genre, Integer.parseInt(year));
+            this.songService.update(id, trackId, title, genre, Integer.parseInt(year), albumId);
         }else {
             Album album = albumService.findById(albumId);
             Song newSong = new Song(trackId, title, genre, Integer.parseInt(year));
             newSong.setAlbum(album);
+            album.getSongs().add(newSong);
             songService.save(newSong);
         }
         return "redirect:/songs";

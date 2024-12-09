@@ -11,5 +11,6 @@ public interface SongService {
     Artist addArtistToSong(Artist artist, Song song);
     void save(Song song);
     void delete(Long id);
-    void update(Long id, String trackId, String title, String genre, int i);
+    void update(Long id, String trackId, String title, String genre, int i, Long albumId);
+    List<Song> findAllByAlbum_Id(Long albumId);
 }

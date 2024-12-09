@@ -1,8 +1,10 @@
 package mk.finki.ukim.mk.lab.service.impl;
 
 import jakarta.transaction.Transactional;
+import mk.finki.ukim.mk.lab.model.Album;
 import mk.finki.ukim.mk.lab.model.Artist;
 import mk.finki.ukim.mk.lab.model.Song;
+import mk.finki.ukim.mk.lab.repository.jpa.AlbumRepository;
 import mk.finki.ukim.mk.lab.repository.jpa.ArtistRepository;
 import mk.finki.ukim.mk.lab.repository.jpa.SongRepository;
 import mk.finki.ukim.mk.lab.service.SongService;
@@ -14,10 +16,12 @@ import java.util.List;
 public class SongServiceImpl implements SongService {
     private final SongRepository songRepository;
     private final ArtistRepository artistRepository;
+    private final AlbumRepository albumRepository;
 
-    public SongServiceImpl(SongRepository songRepository, ArtistRepository artistRepository) {
+    public SongServiceImpl(SongRepository songRepository, ArtistRepository artistRepository, AlbumRepository albumRepository) {
         this.songRepository = songRepository;
         this.artistRepository = artistRepository;
+        this.albumRepository = albumRepository;
     }
 
     @Override
@@ -51,12 +55,20 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public void update(Long id, String trackId, String title, String genre, int year) {
+    public void update(Long id, String trackId, String title, String genre, int year, Long albumId) {
         Song song = songRepository.findById(id).get();
         song.setTrackId(trackId);
         song.setTitle(title);
         song.setGenre(genre);
         song.setReleaseYear(year);
+        Album album = albumRepository.findById(albumId).get();
+        album.getSongs().add(song);
+        song.setAlbum(album);
         this.songRepository.save(song);
+    }
+
+    @Override
+    public List<Song> findAllByAlbum_Id(Long albumId) {
+        return songRepository.findAllByAlbum_Id(albumId);
     }
 }

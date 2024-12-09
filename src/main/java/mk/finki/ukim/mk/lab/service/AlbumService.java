@@ -4,6 +4,6 @@ import mk.finki.ukim.mk.lab.model.Album;
 import java.util.List;
 
 public interface AlbumService {
-    public List<Album> findAll();
-    public Album findById(Long id);
+    List<Album> findAll();
+    Album findById(Long id);
 }
