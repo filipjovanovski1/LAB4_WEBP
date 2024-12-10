@@ -8,9 +8,15 @@ import mk.finki.ukim.mk.lab.repository.jpa.AlbumRepository;
 import mk.finki.ukim.mk.lab.repository.jpa.ArtistRepository;
 import mk.finki.ukim.mk.lab.repository.jpa.SongRepository;
 import mk.finki.ukim.mk.lab.service.SongService;
+import mk.finki.ukim.mk.lab.service.specifications.FieldFilterSpecification;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static mk.finki.ukim.mk.lab.service.specifications.FieldFilterSpecification.filterContainsText;
+import static mk.finki.ukim.mk.lab.service.specifications.FieldFilterSpecification.filterEquals;
 
 @Service
 public class SongServiceImpl implements SongService {
@@ -70,5 +76,14 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<Song> findAllByAlbum_Id(Long albumId) {
         return songRepository.findAllByAlbum_Id(albumId);
+    }
+
+    @Override
+    public List<Song> findByAlbumAndYear(Long albumId, int releaseYear) {
+        Specification<Song> specification = Specification
+                .where(filterEquals(Song.class, "album.id", albumId))
+                .and(FieldFilterSpecification.greaterThan(Song.class, "releaseYear", (long) releaseYear));
+
+        return this.songRepository.findAll(specification);
     }
 }

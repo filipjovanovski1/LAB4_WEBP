@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Songs By Album and Year</title>
+</head>
+<body>
+    <h1>Songs by album and year</h1>
+    <ul th:each="song : ${songs}">
+        <li>
+            <form action="/artists" method="get">
+                <input type="hidden" name="songId" th:value="${song.getId()}">
+                Title: <span th:text="${song.getTitle()}"></span>
+                Genre: <span th:text="${song.getGenre()}"></span>
+                Release Year: <span th:text="${song.getReleaseYear()}"></span>
+                Album: <span th:text="${song.getAlbum().getName()}"></span>
+                <input type="submit" value="Add Artists">
+            </form>
+            <form th:action="@{/songs/edit-form/{id}(id=${song.getId()})}" method="get">
+                <input type="submit" value="Edit Song">
+            </form>
+            <form th:action="@{/songs/delete/{songId}(songId=${song.getId()})}" method="get">
+                <input type="submit" value="Delete Song">
+            </form>
+        </li>
+    </ul>
+</body>
+</html>

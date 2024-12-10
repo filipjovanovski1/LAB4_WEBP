@@ -8,6 +8,8 @@ import mk.finki.ukim.mk.lab.service.SongService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/songs")
 public class SongController {
@@ -67,5 +69,15 @@ public class SongController {
     public String deleteSong(@PathVariable Long id) {
         songService.delete(id);
         return "redirect:/songs";
+    }
+
+    @PostMapping("/search")
+    public String searchByAlbumAndYear(@RequestParam Long albumId, @RequestParam int releaseYear, Model model){
+        List<Song> songs = songService.findByAlbumAndYear(albumId, releaseYear);
+        if(songs.isEmpty()){
+            songs = songService.listSongs();
+        }
+        model.addAttribute("songs", songs);
+        return "album-year";
     }
 }

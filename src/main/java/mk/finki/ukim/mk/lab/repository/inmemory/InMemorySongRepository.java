@@ -8,9 +8,4 @@ import java.util.List;
 
 @Repository
 public class InMemorySongRepository {
-    public List<Song> findAllByAlbum_Id(Long albumId) {
-        return DataHolder.songs.stream()
-                .filter(r -> r.getAlbum().getId().equals(albumId))
-                .toList();
-    }
 }
