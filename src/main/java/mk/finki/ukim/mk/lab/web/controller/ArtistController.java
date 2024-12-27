@@ -21,7 +21,13 @@ public class ArtistController {
     }
 
     @GetMapping
-    public String getArtistsPage(@RequestParam Long songId, Model model) {
+    public String getArtistsPage(Model model) {
+        model.addAttribute("artists", artistService.listArtists());
+        return "artists";
+    }
+
+    @GetMapping("/add")
+    public String addArtistPage(@RequestParam Long songId, Model model) {
         Song song = songService.findById(songId);
         model.addAttribute("songId", songId);
         model.addAttribute("song", song);

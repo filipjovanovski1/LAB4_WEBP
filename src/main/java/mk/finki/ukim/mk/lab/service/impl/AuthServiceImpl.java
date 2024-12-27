@@ -5,7 +5,9 @@ import mk.finki.ukim.mk.lab.model.exceptions.InvalidArgumentsException;
 import mk.finki.ukim.mk.lab.model.exceptions.InvalidUserCredentialsException;
 import mk.finki.ukim.mk.lab.repository.jpa.UserRepository;
 import mk.finki.ukim.mk.lab.service.AuthService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
 

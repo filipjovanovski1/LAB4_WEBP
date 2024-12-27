@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Songs</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul class="toolbar">
+            <li><a href="/home">Home</a></li>
+            <li><a href="#">Songs</a></li>
+            <li><a href="/artists">Artists</a></li>
+            <li><a href="/albums">Albums</a></li>
+            <li class="right"><a href="/login">Login</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1>Song List</h1>
+    <ul th:each="song : ${songs}" id="song-list">
+        <li>
+            <div class="song-details">
+                <span>Title: <span th:text="${song.getTitle()}"></span></span>
+                <span>Genre: <span th:text="${song.getGenre()}"></span></span>
+                <span>Release Year: <span th:text="${song.getReleaseYear()}"></span></span>
+                <span>Album: <span th:text="${song.getAlbum().getName()}"></span></span>
+            </div>
+            <th:block sec:authorize="hasRole('ADMIN')">
+                <form action="/artists" method="get" th:if="${isAdmin}">
+                    <input type="hidden" name="songId" th:value="${song.getId()}">
+                    <input type="submit" value="Add Artists" class="button">
+                </form>
+            </th:block>
+            <th:block sec:authorize="hasRole('ADMIN')">
+                <form th:action="@{/songs/edit-form/{id}(id=${song.getId()})}" method="get">
+                    <input type="submit" value="Edit Song" class="button">
+                </form>
+            </th:block>
+            <th:block sec:authorize = "hasRole('ADMIN')">
+                <form th:action="@{/songs/delete/{songId}(songId=${song.getId()})}" method="get">
+                    <input type="submit" value="Delete Song" class="button delete">
+                </form>
+            </th:block>
+        </li>
+    </ul>
+
+    <h2>By Albums</h2>
+    <a href="/albums">View songs by albums</a>
+
+    <h2>Search by Album and Year</h2>
+    <form action="/songs/search" method="post" class="search-form">
+        <label>Album id:</label>
+        <input type="text" name="albumId" placeholder="Enter album id" required>
+        <label>Release Year:</label>
+        <input type="text" name="releaseYear" placeholder="Enter release year" required>
+        <input type="submit" value="Search songs" class="button">
+    </form>
+
+    <th:block sec:authorize="hasRole('ADMIN')">
+        <h2>Add new song</h2>
+        <form th:action="@{/songs/add-form}" method="get">
+            <input type="submit" value="Add new Song" class="button">
+        </form>
+    </th:block>
+</main>
+</body>
+</html>

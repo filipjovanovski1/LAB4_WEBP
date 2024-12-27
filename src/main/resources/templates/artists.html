@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artists</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul class="toolbar">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/songs">Songs</a></li>
+            <li><a href="#">Artists</a></li>
+            <li><a href="/albums">Albums</a></li>
+            <li class="right"><button onclick="location.href='login.html'">Login</button></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1>Artists</h1>
+    <ul th:each="artist : ${artists}" id="artist-list">
+        <li>
+            <div class="artist-details">
+                <span>Name: <span th:text="${artist.getFullName()}"></span></span>
+                <h3>Songs:</h3>
+                <ul>
+                    <li th:each="song : ${artist.getSongs()}">
+                        <span th:text="${song.getTitle()}"></span>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</main>
+</body>
+</html>

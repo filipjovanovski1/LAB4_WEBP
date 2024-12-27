@@ -1,13 +1,19 @@
 package mk.finki.ukim.mk.lab.model;
 
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import mk.finki.ukim.mk.lab.model.enumerations.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
+@Data
+@Entity
+@NoArgsConstructor
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id
@@ -19,6 +25,7 @@ public class User implements UserDetails {
 
     private String surname;
 
+    @Enumerated(value = EnumType.STRING)
     private Role role;
 
     public User(String username, String password, String name, String surname, Role role) {
@@ -31,7 +38,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return Collections.singletonList(role);
     }
 
     @Override

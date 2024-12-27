@@ -26,7 +26,7 @@ public class SongController {
         model.addAttribute("error", error);
         model.addAttribute("songs", songService.listSongs());
         model.addAttribute("albums", albumService.findAll());
-        return "listSongs";
+        return "songs";
     }
 
     @PostMapping("/add")
